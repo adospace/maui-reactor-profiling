@@ -1,64 +1,75 @@
-
+﻿
 # .NET MAUI App Startup Performance Profiling
 
-## Standard single page .NET 9 (Samsung Tab Active5 SM-X300)
+## Device: Samsung Tab Active5 SM-X300
+
+## .NET 9.0.100
 
 .\profile.ps1 -package com.companyname.mauiappdefault -activity crc6401f73e8879e5c160.MainActivity
 
 Results: 
-Average(ms): 597.3
-Std Err(ms): 1.31698308434256
-Std Dev(ms): 4.16466618643613
+Average(ms): 2307.4
+Std Err(ms): 5.25822107645627
+Std Dev(ms): 16.6279550423042
 
-## Standard single page .NET 10 (Samsung Tab Active5 SM-X300)
+## .NET 10.0.10
 
 .\profile.ps1 -package com.companyname.mauiapp10default -activity crc64cfb40c98d3edc3e2.MainActivity
 
 Results: 
-Average(ms): 625.1
-Std Err(ms): 1.40988573217044
-Std Dev(ms): 4.45845015423272
-
-## Standard shell
+Average(ms): 2410.6
+Std Err(ms): 6.08495412198536
+Std Dev(ms): 19.2423144831038
 
 
-## MauiReactor single page .NET 9
+## .NET 9.0.100 - MauiReactor 3.0.39
 
 .\profile.ps1 -package com.companyname.mauiappreactor -activity crc64bfb9b07720d9155f.MainActivity
 
 Results: 
-Average(ms): 628.9
-Std Err(ms): 1.38604152575279
-Std Dev(ms): 4.38304815295373
+Average(ms): 1601.3
+Std Err(ms): 5.42022959743302
+Std Dev(ms): 17.1402709689459
 
 
-## MauiReactor single page .NET 10 (Samsung Tab Active5 SM-X300)
+## .NET 10.0.10 - MauiReactor 4.0.2-beta
 
 .\profile.ps1 -package com.companyname.mauiapp10reactor -activity crc64153b342623c39f56.MainActivity
 
 Results: 
-Average(ms): 565.5
-Std Err(ms): 2.00693242979872
-Std Dev(ms): 6.34647758821992
+Average(ms): 1388.4
+Std Err(ms): 3.91350936571711
+Std Dev(ms): 12.3756032400669
 
 ## Startup Performance Comparison
 
-### .NET 9
+### .NET 9.0.100
 ```
-Standard .NET 9      ???????????????????????????????????????????????????????????????? 597.3ms
-MauiReactor .NET 9   ???????????????????????????????????????????????????????????????????? 628.9ms
+MauiReactor .NET 9   █████████████████████████████████████████ 1601.3ms
+Standard .NET 9      ███████████████████████████████████████████████████████████████ 2307.4ms
 ```
 
-### .NET 10
+### .NET 10.0.10
 ```
-MauiReactor .NET 10  ?????????????????????????????????????????????????????????? 565.5ms
-Standard .NET 10     ??????????????????????????????????????????????????????????????????? 625.1ms
+MauiReactor .NET 10  ████████████████████████████████████ 1388.4ms
+Standard .NET 10     ████████████████████████████████████████████████████████████████████ 2410.6ms
 ```
-*Scale: Each ? represents ~10.5ms*
+*Scale: Each █ represents ~37ms*
 
-**Key Findings:**
-- **?? Fastest**: MauiReactor .NET 10 (565.5ms)
-- **?? Slowest**: MauiReactor .NET 9 (628.9ms)  
-- **?? Best improvement**: MauiReactor shows 63.4ms (11.2%) speedup from .NET 9?10
-- **?? Regression**: Standard apps are 27.8ms (4.7%) slower in .NET 10
-- **?? Best choice**: MauiReactor + .NET 10 for optimal startup performance
+
+# How to run the profiling script
+
+## Prerequisites
+- Ensure you have ADB (Android Debug Bridge) installed and added to your system PATH.
+- Connect your Android device via USB and enable USB debugging.
+- Make sure all the .NET MAUI app are installed on the device in release mode (run at least one time all the project in release mode)
+- PowerShell 5.0 or higher is installed on your machine.
+
+
+## Steps to Run the Profiling Script
+1. Restart your Android device to ensure a clean state.
+2. Run the profile-all powershell script:
+   ```powershell
+   .\profile-all.ps1
+   ```
+

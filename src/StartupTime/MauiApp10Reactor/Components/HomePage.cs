@@ -12,21 +12,23 @@
                     ScrollView(
                         VStack(
                             Image("dotnet_bot.png")
-                                .HeightRequest(200)
-                                .HCenter()
-                                .Set(SemanticProperties.DescriptionProperty, "Cute dot net bot waving hi to you!"),
+                                .HeightRequest(185)
+                                .Aspect(Aspect.AspectFit)
+                                .Set(SemanticProperties.DescriptionProperty, "dot net bot in a hovercraft number nine"),
 
                             Label("Hello, World!")
-                                .FontSize(32)
-                                .HCenter(),
+                                .ThemeKey("Headline")
+                                .Set(SemanticProperties.HeadingLevelProperty, "Level1"),
 
-                            Label("Welcome to MauiReactor 4: MAUI with superpowers!")
-                                .FontSize(18)
-                                .HCenter(),
+                            Label($"Welcome to {Environment.NewLine}.NET Multi-platform App UI")
+                                .ThemeKey("SubHeadline")
+                                .Set(SemanticProperties.HeadingLevelProperty, "Level2")
+                                .Set(SemanticProperties.DescriptionProperty, "Welcome to dot net Multi platform App U I"),
 
                             Button(State.Counter == 0 ? "Click me" : $"Clicked {State.Counter} times!")
+                                .Set(SemanticProperties.HintProperty, "Counts the number of times you click")
                                 .OnClicked(() => SetState(s => s.Counter++))
-                                .HCenter()
+                                .HFill()
                     )
                     .VCenter()
                     .Spacing(25)
